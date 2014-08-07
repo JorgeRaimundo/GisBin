@@ -49,9 +49,9 @@ As mentioned above, the latitude binning is made by simply rounding the latitude
 	│ Name given │ Meters (aprox.) │ Method                                 │
 	├────────────┼─────────────────┼────────────────────────────────────────┤
 	│ 10         │       11        │ Rounded at the 4th decimal place       │
-	│ 25         │       27        │ Rounded by 25 at the 5th decimal place │	
-	│ 50         │       55        │ Rounded by 5 at the 4th decimal place  │	
-	│ 100        │       111       │ Rounded at the 3rd decimal place       │	
+	│ 25         │       27        │ Rounded by 25 at the 5th decimal place │
+	│ 50         │       55        │ Rounded by 5 at the 4th decimal place  │
+	│ 100        │       111       │ Rounded at the 3rd decimal place       │
 	└────────────┴─────────────────┴────────────────────────────────────────┘
 
 Considering that there is no relevance to bin latitudes above 80° the tool is performing the above roundings fo the latitude from 0° to 80°.
@@ -64,7 +64,7 @@ Exemplifying, using the named binning of 10 meters:
 	│ Latitude  │ Bin Latitude │ Longitude perimeter at current Latitude (m) │
 	├───────────┼──────────────┼─────────────────────────────────────────────┤
 	│ 38.756006 │   38.75600   │               31292328.05                   │
-	│ 38.756036 │              │                                             │                                             
+	│ 38.756036 │              │                                             │
 	├───────────┼──────────────┼─────────────────────────────────────────────┤
 	│ 38.756066 │              │                                             │
 	│ 38.756096 │   38.75610   │               31292284.39                   │
