@@ -4,6 +4,10 @@ This project pretends to be an utility tool that performs binnig of geographic c
 
 It is being developed in C using Visual Studio 2012.
 
+## KNOWN BUGS ##
+
+Negative latitudes are not supported yet. So trivial that it's being delayed while more important things are on the list.
+
 ## Context ##
 
 Given a large amount of geographical information, there is the need to group that information into bins so that it can be easier to interpret and lighter to present. 
@@ -50,4 +54,32 @@ As mentioned above, the latitude binning is made by simply rounding the latitude
 	│ 100        │       111       │ Rounded at the 3rd decimal place       │	
 	└────────────┴─────────────────┴────────────────────────────────────────┘
 
-Since the earth is not a perfect sphere, the longitude binning was made accordingly to the formula presented in wikipedia for the [length of a degree of longitude](http://en.wikipedia.org/wiki/Longitude#Length_of_a_degree_of_longitude "Length of a degree of longitude")
+Considering that there is no relevance to bin latitudes above 80° the tool is performing the above roundings fo the latitude from 0° to 80°.
+
+For each of the binning latitudes the tool calculates a longitude step that bins to the same aproximate binning distance used for the latitude.
+
+Exemplifying, using the named binning of 10 meters:
+
+	┌───────────┬──────────────┬─────────────────────────────────────────────┐
+	│ Latitude  │ Bin Latitude │ Longitude perimeter at current Latitude (m) │
+	├───────────┼──────────────┼─────────────────────────────────────────────┤
+	│ 38.756006 │   38.75600   │               31292328.05                   │
+	│ 38.756036 │              │                                             │                                             
+	├───────────┼──────────────┼─────────────────────────────────────────────┤
+	│ 38.756066 │              │                                             │
+	│ 38.756096 │   38.75610   │               31292284.39                   │
+	│ 38.756126 │              │                                             │
+	├───────────┼──────────────┼─────────────────────────────────────────────┤
+	│ 38.756156 │              │                                             │
+	│ 38.756186 │   38.75620   │               31292240.72                   │
+	│ 38.756216 │              │                                             │
+	│ 38.756246 │              │                                             │
+	└───────────┴──────────────┴─────────────────────────────────────────────┘
+
+Since the earth is not a perfect sphere, the perimeter of a particular longitude was calculated accordingly to the formula presented in wikipedia for the [length of a degree of longitude](http://en.wikipedia.org/wiki/Longitude#Length_of_a_degree_of_longitude "Length of a degree of longitude")
+
+We're using a bin of aproximately 10 meters so we'll divide the perimeter by 10 meters to find that we must divide the the perimeter 3129232, 3129228 and 3129224 times respectively to get longitude steps of aproximately 10 meters.
+
+Since we want the steps to be in degrees, we must divide the 360° circle 3129232, 3129228 and 3129224 times respectively which gives longitude steps of 0.000115044° for the three latitudes above.
+
+Finaly the tool rounds the longitudes according to those steps to get the results as shown in the first table above.
